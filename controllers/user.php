@@ -8,13 +8,27 @@
         }
 
         protected function register(){
+            if(Request::session('is_logged_in')){
+                header("Location: ".HOME_URL);
+                exit;
+            }
+
             $viewModel = new UserModel();
             $this->returnView($viewModel->register(), true);
         }
 
         protected function login(){
+            if(Request::session('is_logged_in')){
+                header("Location: ".HOME_URL);
+                exit;
+            }
+
             $viewModel = new UserModel();
             $this->returnView($viewModel->login(), true);
+        }
+
+        protected function fbLogin(){
+            echo 'Hello';
         }
 
         protected function logout(){

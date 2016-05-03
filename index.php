@@ -1,9 +1,10 @@
 <?php
     session_start();
-
     // include config
     require('config.php');
 
+    require('classes/Request.php');
+    require('classes/Messages.php');
     require('classes/Bootstrap.php');
     require('classes/Controller.php');
     require('classes/Model.php');
@@ -13,6 +14,7 @@
 
     require('models/home.php');
     require('models/user.php');
+
 
     $bootstrap = new Bootstrap($_GET);
     $controller = $bootstrap->createController();

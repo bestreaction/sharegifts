@@ -1,7 +1,9 @@
+<!DOCTYPE html>
 <html>
 <head>
     <title>Sharegifts</title>
-
+    <meta charset="UTF-8">
+    
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <!-- Optional theme -->
@@ -18,24 +20,24 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Project name</a>
+                <a class="navbar-brand" href="<?php echo HOME_URL;?>">Share</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
-                <form class="navbar-form navbar-right">
-                    <div class="form-group">
-                        <input type="text" placeholder="Email" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" placeholder="Password" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-success">Sign in</button>
-                </form>
+                <ul class="nav navbar-nav pull-right">
+                    <li><a href="<?php echo HOME_URL; ?>">Home</a></li>
+                    <?php if(!Request::session("is_logged_in")) { ?>
+                        <li><a href="<?php echo ROOT_URL; ?>/user/login">Sign In</a></li>
+                    <?php } else { ?>
+                        <li><a href="<?php echo ROOT_URL; ?>/user/logout">Logout</a></li>
+                    <?php } ?>
+                </ul>
             </div><!--/.navbar-collapse -->
         </div>
     </nav>
 
     <div class="container" style="margin-top:60px;">
         <div class="row">
+            <?php Messages::display(); ?>
             <?php require($view); ?>
         </div>
 
