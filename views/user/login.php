@@ -1,15 +1,10 @@
 <div class="col-sm-6 col-sm-push-3 col-sm-pull-3">
-    <div
-        class="fb-like"
-        data-share="true"
-        data-width="450"
-        data-show-faces="true">
-    </div>
+
     <form role="form" method="POST" action="<?php $_SERVER['PHP_SELF']; ?>">
         <h2>Sign in</h2>
         <div class="form-group">
-            <label for="inputUsername" class="sr-only">Username</label>
-            <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" required autofocus autocomplete="off">
+            <label for="inputEmail" class="sr-only">Email</label>
+            <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email" required autofocus autocomplete="off">
         </div>
 
         <div class="form-group">

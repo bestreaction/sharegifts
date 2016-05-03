@@ -2,8 +2,8 @@
     <form role="form" method="POST" action="<?php $_SERVER['PHP_SELF']; ?>">
         <h2>Sign up</h2>
         <div class="form-group">
-            <label for="inputUsername" class="sr-only">Username</label>
-            <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" autofocus required autocomplete="off">
+            <label for="inputName" class="sr-only">Name</label>
+            <input type="text" id="inputName" name="name" class="form-control" placeholder="Name" autofocus required autocomplete="off">
         </div>
 
         <div class="form-group">

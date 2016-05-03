@@ -28,10 +28,20 @@
         }
 
         protected function fbLogin(){
-            echo 'Hello';
+            if(Request::session('is_logged_in')){
+                header("Location: ".HOME_URL);
+                exit;
+            }
+            
+            $model = new UserModel();
+            echo $model->fbProcess();
         }
 
         protected function logout(){
+            echo '<script>' .
+                'FB.logout();'.
+            '</script>';
+            
             unset($_SESSION['is_logged_in']);
             unset($_SESSION['user_data']);
             session_destroy();

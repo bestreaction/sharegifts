@@ -2,6 +2,10 @@
 
     class Request {
 
+        public static function all()
+        {
+            return $_REQUEST;
+        }
 
         public static function post($name)
         {
