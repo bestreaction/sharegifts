@@ -11,9 +11,11 @@
 
     require('controllers/home.php');
     require('controllers/user.php');
+    require('controllers/gift.php');
 
     require('models/home.php');
     require('models/user.php');
+    require('models/gift.php');
 
 
     $bootstrap = new Bootstrap($_GET);

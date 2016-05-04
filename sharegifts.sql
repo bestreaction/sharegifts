@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50709
 File Encoding         : 65001
 
-Date: 2016-05-02 19:32:30
+Date: 2016-05-04 08:41:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,31 +26,20 @@ CREATE TABLE `gifts` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
--- Records of gifts
--- ----------------------------
-INSERT INTO `gifts` VALUES ('1', 'Drone');
-INSERT INTO `gifts` VALUES ('2', 'Ipad');
-
--- ----------------------------
 -- Table structure for users
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `fb_id` bigint(20) DEFAULT NULL,
   `register_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `unq_username` (`username`) USING BTREE,
+  UNIQUE KEY `unq_username` (`name`) USING BTREE,
   UNIQUE KEY `unq_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
-
--- ----------------------------
--- Records of users
--- ----------------------------
-INSERT INTO `users` VALUES ('1', 'sinan.gul', 'sinangul@gmail.com', '', null);
-INSERT INTO `users` VALUES ('2', 'baris.zeytunlu', 'baris.zeytunlu@gmail.com', '', null);
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for users__gifts
@@ -72,10 +61,3 @@ CREATE TABLE `users__gifts` (
   CONSTRAINT `frn_receiver_id` FOREIGN KEY (`receiver_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `frn_sender_id` FOREIGN KEY (`sender_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
-
--- ----------------------------
--- Records of users__gifts
--- ----------------------------
-INSERT INTO `users__gifts` VALUES ('5', '1', '2', '1', '1461240754', null, null);
-INSERT INTO `users__gifts` VALUES ('8', '1', '2', '1', '1461845866', null, null);
-INSERT INTO `users__gifts` VALUES ('10', '1', '2', '2', '1461846526', null, null);

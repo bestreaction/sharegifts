@@ -15,9 +15,9 @@
             return $this->{$this->action}();
         }
 
-        protected function returnView($viewModel, $fullView)
+        protected function returnView($viewModel, $fullView, $data = null)
         {
-            $view = 'views/' . get_class($this) . '/' . $this->action . '.php';
+            $view = 'views/' . strtolower(get_class($this)) . '/' . $this->action . '.php';
             if($fullView){
                 require('views/main.php');
             } else {

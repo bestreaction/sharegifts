@@ -26,6 +26,14 @@
             }
         }
 
+        public static function auth($key, $default = null)
+        {
+            if(self::session('is_logged_in')){
+                return $_SESSION['user_data'][$key];
+            }
+            return $default;
+        }
+
         public static function setSession($data)
         {
             foreach($data as $key => $value){

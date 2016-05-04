@@ -4,7 +4,10 @@
 
         protected function index(){
             $viewModel = new UserModel();
-            $this->returnView($viewModel->index(), true);
+
+            $users = $viewModel->index();
+
+            $this->returnView($viewModel->index(), true, ['users' => $users]);
         }
 
         protected function register(){
@@ -41,11 +44,12 @@
             echo '<script>' .
                 'FB.logout();'.
             '</script>';
-            
+
             unset($_SESSION['is_logged_in']);
             unset($_SESSION['user_data']);
             session_destroy();
 
             header("Location: " .ROOT_URL. "/user/login");
+            exit;
         }
     }

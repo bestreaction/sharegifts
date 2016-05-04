@@ -25,6 +25,7 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav pull-right">
                     <li><a href="<?php echo HOME_URL; ?>">Home</a></li>
+                    <li><a href="<?php echo ROOT_URL; ?>/user/index">Users</a></li>
                     <?php if(!Request::session("is_logged_in")) { ?>
                         <li><a href="<?php echo ROOT_URL; ?>/user/login">Sign In</a></li>
                     <?php } else { ?>
@@ -48,5 +49,6 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="<?php ROOT_PATH; ?>/assets/js/main.js"></script>
 </body>
 </html>

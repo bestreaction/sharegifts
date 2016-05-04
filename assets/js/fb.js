@@ -7,7 +7,7 @@ function statusChangeCallback(response) {
     // Full docs on the response object can be found in the documentation
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
-        // Logged into your app and Facebook.
+        //response.authResponse.accessToken;
         authAPI();
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
@@ -28,7 +28,7 @@ function checkLoginState() {
 
 window.fbAsyncInit = function() {
     FB.init({
-        appId      : '1791597194406756',
+        appId      : '1792063247693484',
         cookie     : true,  // enable cookies to allow the server to access
                             // the session
         xfbml      : true,  // parse social plugins on this page
@@ -49,17 +49,17 @@ window.fbAsyncInit = function() {
 // successful.  See statusChangeCallback() for when this call is made.
 function authAPI() {
     FB.api('/me?fields=id,name,email', function(response) {
-        console.log(JSON.stringify(response));
         $.ajax({
             url: '/user/fb-login',
             type: 'post',
             cache: false,
             dataType: 'json',
             data: response
-        }).always(function (xhr) {
-            if (xhr.error === false){
+        }).always(function (msg) {
+            if (msg.error === false){
                 window.top.location = '/home/index';
             }
         });
     });
 }
+

@@ -4,7 +4,14 @@
     {
         public function index()
         {
-            return;
+            if(Request::auth('id')) {
+                $this->query("SELECT * FROM users WHERE id <> :id ORDER BY name asc");
+                $this->bind(':id', Request::auth('id'));
+
+                return $this->resultSet();
+            } else {
+                return [];
+            }
         }
 
         public function register()
@@ -120,7 +127,7 @@
                     } else {
                         return json_encode([
                             'error' => true,
-                            'code' => 123,
+                            'code' => __LINE__,
                             'data' => 'There was an error'
                         ]);
                     }
@@ -128,7 +135,7 @@
             } else {
                 return json_encode([
                     'error' => true,
-                    'code' => 131,
+                    'code' => __LINE__,
                     'data' => 'There was an error.'
                 ]);
             }
