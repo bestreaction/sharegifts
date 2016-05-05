@@ -24,3 +24,24 @@ $("body").on("click", "#sendGift", function(e){
         }
     });
 });
+
+$("body").on("click", "#claimGift", function(e){
+    var id = $(this).data('id');
+
+    $.ajax({
+        type: "post",
+        url: "/gift/receive",
+        dataType: "json",
+        cache: false,
+        data: "id=" + id
+    }).always(function(xhr){
+        if (xhr.error === false) {
+            $("#row-" + id).removeClass("danger").addClass("success");
+            $("#row-" + id + " td:nth-child(4)").text("");
+            $("#claimStatusMsg").fadeIn().html('<div class="alert alert-success">' + xhr.data + '</div>');
+        } else {
+            $("#row-" + id).addClass("danger");
+            $("#claimStatusMsg").fadeIn().html('<div class="alert alert-danger">' + xhr.data + '</div>');
+        }
+    });
+});

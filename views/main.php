@@ -20,17 +20,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo HOME_URL;?>">Share</a>
+                <a class="navbar-brand" href="<?php echo HOME_URL;?>">Share (Now: <?php echo (new DateTime(CURDATE))->format('d-m-Y H:i:s');?>)</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav pull-right">
                     <li><a href="<?php echo HOME_URL; ?>">Home</a></li>
+                <?php if(!Request::session("is_logged_in")) { ?>
+                    <li><a href="<?php echo ROOT_URL; ?>/user/login">Sign In</a></li>
+                <?php } else { ?>
+                    <li><a href="<?php echo ROOT_URL; ?>/gift/my-gifts">My Gifts <span class="badge"><?php echo $counter; ?></span></a></li>
                     <li><a href="<?php echo ROOT_URL; ?>/user/index">Users</a></li>
-                    <?php if(!Request::session("is_logged_in")) { ?>
-                        <li><a href="<?php echo ROOT_URL; ?>/user/login">Sign In</a></li>
-                    <?php } else { ?>
-                        <li><a href="<?php echo ROOT_URL; ?>/user/logout">Logout</a></li>
-                    <?php } ?>
+                    <li><a href="<?php echo ROOT_URL; ?>/user/logout">Logout</a></li>
+                <?php } ?>
                 </ul>
             </div><!--/.navbar-collapse -->
         </div>

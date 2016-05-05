@@ -33,7 +33,7 @@
                     $this->bind(":name", Request::post('name'));
                     $this->bind(":email", Request::post('email'));
                     $this->bind(":password", $password);
-                    $this->bind(":register_at", (new DateTime())->format('Y-m-d H:i:s'));
+                    $this->bind(":register_at", (new DateTime(CURDATE))->format('Y-m-d H:i:s'));
                     $this->execute();
 
                     if ($this->lastInsertId()) {
@@ -108,7 +108,7 @@
                     $this->bind(":name", Request::post('name'));
                     $this->bind(":email", Request::post('email'));
                     $this->bind(":fb_id", Request::post('id'));
-                    $this->bind(":register_at", (new DateTime())->format('Y-m-d H:i:s'));
+                    $this->bind(":register_at", (new DateTime(CURDATE))->format('Y-m-d H:i:s'));
                     $this->execute();
 
                     if ($this->lastInsertId()) {

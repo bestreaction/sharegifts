@@ -40,7 +40,7 @@
                 echo json_encode([
                     'error' => true,
                     'code' => __LINE__,
-                    'data' => 'You can not send a gift to user for a while.'
+                    'data' => 'You can send 1 gift per day to every other users.'
                 ]);
                 exit;
             }
@@ -64,14 +64,85 @@
             exit;
         }
 
-        public function receive($giftId, $from)
+        public function myGifts(){
+            $authId = Request::auth('id');
+            if(!$authId){
+                header("Location: /user/login");
+                exit;
+            }
+            $model = new GiftModel($authId);
+            /** job for expired gifts - this is here because testing purpose */
+            $model->findAndUpdateExpiredRequest();
+            /** End */
+            $myGifts = $model->getMyGifts();
+            $myGiftCounter = $model->myGiftCounter();
+
+            return $this->returnView(compact('myGifts', 'myGiftCounter'), true);
+        }
+
+        public function receive()
         {
-            // TODO: Implement receive() method.
+            $authId = Request::auth('id');
+            if(!$authId){
+                echo json_encode([
+                    'error' => true,
+                    'code' => __LINE__,
+                    'data' => 'There is an error about authentication.'
+                ]);
+                exit;
+            }
+
+            if(!Request::has('id')) {
+                echo json_encode([
+                    'error' => true,
+                    'code' => __LINE__,
+                    'data' => 'Required parameters error.'
+                ]);
+                exit;
+            }
+
+            $giftModel = new GiftModel($authId);
+            $id = Request::post('id');
+
+            if(!$giftModel->canUserReceiveGift($id)){
+                echo json_encode([
+                    'error' => true,
+                    'code' => __LINE__,
+                    'data' => 'Expired or already claimed gift.'
+                ]);
+                exit;
+            }
+
+            if(!$giftModel->receiveGift($id)){
+                echo json_encode([
+                    'error' => true,
+                    'code' => __LINE__,
+                    'data' => 'System Error: You could not receive gift.'
+                ]);
+                exit;
+            }
+
+            echo json_encode([
+                'error' => false,
+                'code' => __LINE__,
+                'data' => 'You receive the gift successfully.'
+            ]);
+            exit;
         }
 
         public function buy($giftId)
         {
             // TODO: Implement buy() method.
+        }
+
+        public function truncate()
+        {
+            $model = new GiftModel(null);
+            $model->truncatePivotTable();
+
+            Messages::setMsg("Truncated users__gifts table.", "success");
+            header("Location: /user/index");
+            exit;
         }
 
     }

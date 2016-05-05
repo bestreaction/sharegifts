@@ -7,7 +7,7 @@
 
             $users = $viewModel->index();
 
-            $this->returnView($viewModel->index(), true, ['users' => $users]);
+            $this->returnView(['users' => $users], true);
         }
 
         protected function register(){
@@ -41,15 +41,30 @@
         }
 
         protected function logout(){
-            echo '<script>' .
-                'FB.logout();'.
-            '</script>';
-
             unset($_SESSION['is_logged_in']);
             unset($_SESSION['user_data']);
             session_destroy();
 
             header("Location: " .ROOT_URL. "/user/login");
+            exit;
+        }
+
+        protected function changeDefaultTime(){
+            if(Request::post('curdate')) {
+                if(!DateTime::createFromFormat('d-m-Y', Request::post('curdate'))) {
+                    Messages::setMsg('Date format must be d-m-Y', 'error');
+                    header('Location: /user/index');
+                    exit;
+                } else {
+                    Messages::setMsg('Current date changed: '.Request::post('curdate'), 'success');
+                    Request::setSession(['curdate' => (new DateTime(Request::post('curdate')))->format('d-m-Y H:i:s')]);
+                }
+            } else {
+                Messages::setMsg('Current date is now', 'success');
+                Request::setSession(['curdate' => (new DateTime('now'))->format('d-m-Y H:i:s')]);
+            }
+
+            header('Location: /user/index');
             exit;
         }
     }
