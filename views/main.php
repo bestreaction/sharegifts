@@ -30,7 +30,7 @@
                 <?php } else { ?>
                     <li><a href="<?php echo ROOT_URL; ?>/gift/my-gifts">My Gifts <span class="badge"><?php echo $counter; ?></span></a></li>
                     <li><a href="<?php echo ROOT_URL; ?>/user/index">Users</a></li>
-                    <li><a href="<?php echo ROOT_URL; ?>/user/logout">Logout (<?php echo Request::session('name'); ?>)</a></li>
+                    <li><a href="<?php echo ROOT_URL; ?>/user/logout">Logout (<?php echo Request::auth('name'); ?>)</a></li>
                 <?php } ?>
                 </ul>
             </div><!--/.navbar-collapse -->
