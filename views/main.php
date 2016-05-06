@@ -40,7 +40,7 @@
     <div class="container" style="margin-top:60px;">
         <div class="row">
             <?php Messages::display(); ?>
-            <?php require($view); ?>
+            <?php require(strtolower($view)); ?>
         </div>
 
     </div>
